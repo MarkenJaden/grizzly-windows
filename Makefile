@@ -46,7 +46,7 @@ $(GOX):
 
 GOPATH ?= $(HOME)/go
 cross: $(GOX)
-	CGO_ENABLED=0 $(GOPATH)/bin/gox -output="dist/{{.Dir}}-{{.OS}}-{{.Arch}}" -ldflags=${LDFLAGS} -arch="amd64 arm64 arm" -os="linux" -osarch="darwin/amd64 darwin/arm64" ./cmd/grr
+	CGO_ENABLED=0 $(GOPATH)/bin/gox -output="dist/{{.Dir}}-{{.OS}}-{{.Arch}}" -ldflags=${LDFLAGS} -arch="amd64 arm64 arm" -os="linux windows" -osarch="darwin/amd64 darwin/arm64" ./cmd/grr
 
 # Docker container
 container: static
