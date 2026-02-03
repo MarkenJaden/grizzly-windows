@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/grafana/grafana-openapi-client-go/client/provisioning"
@@ -42,7 +41,9 @@ func (h *AlertRuleGroupHandler) ProxyConfigurator() grizzly.ProxyConfigurator {
 
 // ResourceFilePath returns the location on disk where a resource should be updated
 func (h *AlertRuleGroupHandler) ResourceFilePath(resource grizzly.Resource, filetype string) string {
-	filename := strings.ReplaceAll(resource.Name(), string(os.PathSeparator), "-")
+	filename := resource.Name()
+	filename = strings.ReplaceAll(filename, "/", "-")
+	filename = strings.ReplaceAll(filename, "\\", "-")
 	return fmt.Sprintf(alertRuleGroupPattern, filename, filetype)
 }
 

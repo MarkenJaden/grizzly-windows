@@ -3,7 +3,6 @@ package grafana
 import (
 	"errors"
 	"fmt"
-	"os"
 	"sort"
 	"strings"
 
@@ -37,7 +36,9 @@ func (h *AlertNotificationTemplateHandler) ProxyConfigurator() grizzly.ProxyConf
 
 // ResourceFilePath returns the location on disk where a resource should be updated
 func (h *AlertNotificationTemplateHandler) ResourceFilePath(resource grizzly.Resource, filetype string) string {
-	filename := strings.ReplaceAll(resource.Name(), string(os.PathSeparator), "-")
+	filename := resource.Name()
+	filename = strings.ReplaceAll(filename, "/", "-")
+	filename = strings.ReplaceAll(filename, "\\", "-")
 	return fmt.Sprintf(notificationTemplatePattern, filename, filetype)
 }
 

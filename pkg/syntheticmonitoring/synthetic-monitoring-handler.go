@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"os"
 	"strings"
 	"time"
 
@@ -54,7 +53,9 @@ const (
 
 // ResourceFilePath returns the location on disk where a resource should be updated
 func (h *SyntheticMonitoringHandler) ResourceFilePath(resource grizzly.Resource, filetype string) string {
-	filename := strings.ReplaceAll(resource.Name(), string(os.PathSeparator), "-")
+	filename := resource.Name()
+	filename = strings.ReplaceAll(filename, "/", "-")
+	filename = strings.ReplaceAll(filename, "\\", "-")
 	return fmt.Sprintf(syntheticMonitoringPattern, filename, filetype)
 }
 
