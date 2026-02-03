@@ -15,7 +15,6 @@
 
 vendor/
 
-grr.exe
 .vs/slnx.sqlite
 /.vs
 /grr.exe
