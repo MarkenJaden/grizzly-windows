@@ -12,3 +12,10 @@
 /docs/public/
 
 /resources
+
+vendor/
+
+grr.exe
+.vs/slnx.sqlite
+/.vs
+/grr.exe
